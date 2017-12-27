@@ -22,7 +22,6 @@ public class Solution {
     }
     
     private static void sortStrings(String[] unsorted, int low, int high){
-        //if(low<high){
             int i = low, j = high;
             int mid = (low+high)/2;
             String pivot = unsorted[mid];
@@ -43,7 +42,6 @@ public class Solution {
                 sortStrings(unsorted,low,j);
             if (i < high)
                 sortStrings(unsorted,i,high);
-        //}
     }
 }
 
