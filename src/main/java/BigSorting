@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static StrComparator comp = new StrComparator();
+    
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String[] unsorted = new String[n];
+        for(int unsorted_i=0; unsorted_i < n; unsorted_i++){
+            unsorted[unsorted_i] = in.next();
+        }
+        // your code goes here
+        sortStrings(unsorted,0,unsorted.length-1);
+        for(String s: unsorted)
+            System.out.println(s);
+    }
+    
+    private static void sortStrings(String[] unsorted, int low, int high){
+        //if(low<high){
+            int i = low, j = high;
+            int mid = (low+high)/2;
+            String pivot = unsorted[mid];
+            while(i<=j){
+                while(comp.compare(unsorted[i],pivot)<0)
+                    i++;
+                while(comp.compare(unsorted[j],pivot)>0)
+                    j--;
+                if(i<=j){
+                    String temp = unsorted[i];
+                    unsorted[i] = unsorted[j];
+                    unsorted[j] = temp;
+                    i++;
+                    j--;
+                }
+            }
+            if (low < j)
+                sortStrings(unsorted,low,j);
+            if (i < high)
+                sortStrings(unsorted,i,high);
+        //}
+    }
+}
+
+class StrComparator implements Comparator<String>{
+        public int compare(String str1, String str2){
+            if(str1.length() == str2.length())
+                return str1.compareTo(str2);
+            else
+                //if return > 0, str1 is the larger number
+                return str1.length() - str2.length();
+        }
+}
