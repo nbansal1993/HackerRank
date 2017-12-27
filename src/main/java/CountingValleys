@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String s = in.next();
+        int ans =valleys(s);
+        System.out.println(ans);
+    }
+    
+    private static int valleys(String s){
+        char[] steps = s.toCharArray();
+        int tempCount=0;
+        int count=0;
+        int prev=0;
+        for(char step:steps){
+            if(step=='U')
+                tempCount++;
+            else
+                tempCount--;
+            if(prev==0 && tempCount<0)
+                count++;
+            prev = tempCount;
+        }
+        return count;
+    }
+    
+}
