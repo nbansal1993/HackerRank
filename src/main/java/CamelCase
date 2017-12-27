@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        int count =0;
+        int n = s.length();
+        if (n==0)
+            System.out.println(count);
+        count=1;
+        for(int i=1;i<n;i++){
+            if(s.charAt(i)-'A'<=25)
+                count++;
+        }
+        System.out.println(count);
+    }
+}
