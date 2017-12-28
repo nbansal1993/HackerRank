@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int len = in.nextInt();
+        String s = in.next();
+        System.out.println(findT(s));
+    }
+    
+    private static int findT(String s){
+        int n = s.length();
+        if(n<2)
+            return 0;
+        HashSet<Character> str = new HashSet<>();
+        for(int i=0;i<n;i++)
+            str.add(s.charAt(i));
+        
+        int max =0;
+        int temp=0;
+        for(char a: str){
+            for(char b:str){
+                if(a==b)
+                    continue;
+                temp = count_alternating(s,a,b);
+                if(temp>max)
+                    max = temp;
+            }
+        }
+        return max;
+    }
+    
+    private static int count_alternating(String s, char c, char d) {
+        int n = 0;
+        boolean last_c = false;
+        boolean last_d = false;
+        for (int i=0;i<s.length();i++) {
+            char a = s.charAt(i);
+            if (a == c) {
+                if (last_c) 
+                    return 0;
+                n++;
+                last_c = true;
+                last_d = false;
+            }
+            if (a == d) {
+                if (last_d) 
+                    return 0;
+                n++;
+                last_c = false;
+                last_d = true;
+            }
+        }
+        return n;
+    }
+}
