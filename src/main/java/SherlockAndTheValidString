@@ -1,0 +1,55 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static String isValid(String s){
+        // Complete this function
+        int n =s.length();
+
+        int[] chars = new int[26];
+        int min=Integer.MAX_VALUE,max=0;
+        for(int i=0;i<n;i++){
+            chars[s.charAt(i)-'a']++;
+        }
+
+        for(int i=0;i<n;i++){
+            if(min > chars[s.charAt(i)-'a'] )
+                min = chars[s.charAt(i)-'a'];
+            if(max < chars[s.charAt(i)-'a'])
+                max = chars[s.charAt(i)-'a'];
+        }
+        
+        int minCount=0;
+        int maxCount=0;
+        int temp=0;
+        for(int i=0;i<26;i++){
+            if(chars[i]==min && chars[i]==max){
+                minCount++;
+                maxCount++;
+            }
+            else if(chars[i]==max)
+                maxCount++;
+            else if(chars[i]==min)
+                minCount++;
+            else if (chars[i]!=0)
+                temp++;
+        }
+        if(max==min)
+            return "YES";
+        if(temp==0 && ((minCount==1 && min==1 )||(maxCount==1 && max==min+1)))
+            return "YES";
+        
+        return "NO";
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        String result = isValid(s);
+        System.out.println(result);
+    }
+}
