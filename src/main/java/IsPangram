@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    public static void main(String args[] ) throws Exception {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        System.out.println(isPangram(s));
+    }
+    
+    private static String isPangram(String s) {
+        int n = s.length();
+        int[] chars = new int[26];
+        Arrays.fill(chars,0);
+        s = s.toLowerCase();
+        char c = '\0';
+        for(int i=0;i<n;i++){
+            c = s.charAt(i);
+            if(c==' ')
+                continue;
+            else
+                chars[c-'a']++;
+        }
+        for(int i=0;i<26;i++){
+            //System.out.println(i +" "+ chars[i]);
+            if(chars[i]==0)
+                return "not pangram";
+        }
+        return "pangram";
+    }
+}
