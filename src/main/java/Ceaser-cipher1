@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+import java.lang.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        String s = in.next();
+        int k = in.nextInt();
+        System.out.println(encrypt(s,n,k));
+    }
+    
+    private static String encrypt(String s, int n, int k){
+        if(n==0)
+            return "";
+        k = k%26;
+        StringBuilder ans = new StringBuilder();
+        char temp= '\0';
+        for(int i=0;i<n;i++){
+            temp = s.charAt(i);
+            if(temp>=65 && temp<=90)
+                temp= temp+k>90 ? (char)(temp+ k -26):(char)(temp+k);
+            else if(temp>=97 && temp<=122)
+                temp= temp+k>122? (char)(temp+ k -26):(char)(temp+k);
+            ans.append(String.valueOf(temp));
+        }
+        return ans.toString();
+    }
+}
