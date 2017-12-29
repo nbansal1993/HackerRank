@@ -15,8 +15,7 @@ public class Solution {
         int j=mid;
         if(n%2!=0)
             j++;
-        int tempi = i;
-        int tempj= j;
+        
         int temp=0;
         char[] str = s.toCharArray();
         while(i>=0 && j<n){
@@ -30,7 +29,7 @@ public class Solution {
         j = n-1;
         i = 0;
         k = k-temp;
-        while(i<=tempi && j>=tempj){
+        while(i<mid && j>= mid){
             if(str[i]==str[j] && str[i]!='9' && k>1){
                 str[i]='9';
                 k--;
