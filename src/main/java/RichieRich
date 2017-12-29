@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static String richieRich(String s, int n, int k){
+        // Complete this function 3 2 329
+        int len = s.length();
+        
+        int mid =n/2;
+        int i = mid-1;
+        int j=mid;
+        if(n%2!=0)
+            j++;
+        int tempi = i;
+        int tempj= j;
+        int temp=0;
+        char[] str = s.toCharArray();
+        while(i>=0 && j<n){
+            if(str[i]!=str[j])
+                temp++;
+            j++;
+            i--;
+        }
+        if(temp>k)
+            return "-1";
+        j = n-1;
+        i = 0;
+        k = k-temp;
+        while(i<=tempi && j>=tempj){
+            if(str[i]==str[j] && str[i]!='9' && k>1){
+                str[i]='9';
+                k--;
+                str[j]='9';
+                k--;
+            }
+            else if(str[i]<str[j] && k>0) {
+                if(str[j]=='9')
+                    k++;
+                str[j]='9';
+                str[i]='9';
+                temp--;
+                k--;
+            }else if(str[i]<str[j]) {
+                str[i]=str[j];
+                temp--;
+            }else if(str[i]>str[j] && k>0){
+                if(str[i]=='9')
+                    k++;
+                str[i]='9';
+                str[j]='9';
+                temp--;
+                k--;
+            }
+            else if(str[i]>str[j]){
+                str[j]=str[i];
+                temp--;
+            }
+            i++; j--; 
+        }
+        if(k>0 && n%2!=0)
+            str[mid]='9';
+        return new String(str);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int k = in.nextInt();
+        String s = in.next();
+        String result = richieRich(s, n, k);
+        System.out.println(result);
+    }
+}
